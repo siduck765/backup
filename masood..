@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Function
+set(){
+    sed -i "s/$1/$2/1" $3
+}
+
+# Get the GTK file locations
+file=( "$HOME/.gtkrc-2.0" "$HOME/.config/gtk-3.0/settings.ini" )
+
+# Get the current used icons name
+oldIcon=( $(grep "icon-theme-name" ${file[0]} | cut -d '"' -f 2) $(grep "icon-theme-name" ${file[1]} | cut -d '=' -f 2) )
+
+# Get the current used themes name
+oldTheme=( $(grep "gtk-theme-name" ${file[0]} | cut -d '"' -f 2) $(grep "gtk-theme-name" ${file[1]} | cut -d '=' -f 2) )
+
+# Get the WM/DE name
+wm="$1"
+
+# Declare your icons and themes here
+if [ $wm = "bspwm" ] || [ $wm = "fluxbox" ]; then
+    newIcon="oomox-Based_on_16"
+    newTheme="oomox-iceb"
+elif [ $wm = "dwm" ]; then
+    newIcon="oomox-Based_on_16"
+    newTheme="base16"
+elif [ $wm = "i3" ]; then
+    newIcon="Papirus-Dark"
+    newTheme="flatd"
+elif [ $wm = "openbox" ]; then
+    newIcon="oomox-Based_on_16"
+    newTheme="Gtk-Theme"
+elif [ $wm = "awesome" ]; then
+    newIcon="Tela red Dark"
+    newTheme="Gtk-Theme"
+elif [ $wm = "icewm" ]; then
+    newIcon="bloom-classic"
+    newTheme="siduck"
+else
+    newIcon="Papirus"
+    newTheme="siduck"
+fi
+
+# Change the icons and themes
+for i in 0 1
+do
+    set ${oldTheme[i]} $newTheme ${file[i]}
+    set ${oldIcon[i]} $newIcon ${file[i]}
+done
+
+# Write the log
+echo "$(date +"[%m-%d-%y %H:%M:%S]") GTK for $wm changed into \
+$newTheme with $newIcon" >> $HOME/.cache/gtkchanger.log

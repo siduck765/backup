@@ -1,0 +1,14 @@
+
+# wallpaper
+
+#nitrogen --restore &
+cp -r ~/Public/iconchanger/zero/settings.ini ~/.config/gtk-3.0/ &
+feh --bg-fill ~/Pictures/wallpapers\ /ocean.jpg &
+xrdb merge ~/Public/xresources/ocean/.Xresources &
+
+/home/sid/./masood.. openbox
+cp -r ~/Public/rofi/openbox/rofi/ ~/.config/
+
+#dock
+tint2 -c /home/sid/Public/top/tint2rc &
+plank &

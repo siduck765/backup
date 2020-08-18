@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ xrdb merge ~/Public/xresources/white/.Xresources &
+ cp -r ~/Public/rofi/icewm/rofi/ ~/.config/ &
+ nitrogen --restore & 
+
+ cp -r ~/Public/rofi/normal/rofi/ ~/.config/ 
